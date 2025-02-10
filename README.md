@@ -1,4 +1,4 @@
-Final Project Proposal<br>BU CS 506: Data Science Tools and Applications<br>Lance Galletti<br>Xinyu Li, Wenshou He, Benjamin Pfeiffer<br>Monday, February 10<sup>th</sup>, 2025
+BU CS 506: Data Science Tools and Applications<br>Final Project Proposal<br>Lance Galletti<br>Xinyu Li, Wenshou He, Benjamin Pfeiffer<br>Monday, February 10<sup>th</sup>, 2025
 
 # Impact of Socioeconomic Factors on Cancer Incidence and Outcomes
 
