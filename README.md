@@ -4,7 +4,8 @@ Lance Galletti
 
 Xinyu Li, Wenshou He & Benjamin Pfeiffer
 
-Monday, February 10^th, 2025
+Monday, February 1010<sup>th</sup>
+, 2025
 
 # Final Project Proposal: Impact of Socioeconomic Factors on Cancer Incidence and Outcomes
 
