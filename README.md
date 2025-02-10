@@ -1,7 +1,10 @@
 BU CS 506: Data Science Tools and Applications
+
 Lance Galletti
+
 Xinyu Li, Wenshou He & Benjamin Pfeiffer
-Monday, February 10th, 2025
+
+Monday, February 10^th, 2025
 
 # Final Project Proposal: Impact of Socioeconomic Factors on Cancer Incidence and Outcomes
 
