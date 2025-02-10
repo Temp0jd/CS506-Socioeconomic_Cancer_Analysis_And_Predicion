@@ -6,8 +6,6 @@ Lance Galletti
 Xinyu Li, Wenshou He, Benjamin Pfeiffer  
 Monday, February 10th, 2025
 
----
-
 ## 1. Project Description
 
 Cancer remains one of the leading causes of death worldwide, and multiple studies suggest that socioeconomic factors may play a role in cancer incidence and mortality rates. This project investigates the relationship between socioeconomic status and cancer rates by analyzing key variables such as median income and poverty levels across different U.S. counties.
