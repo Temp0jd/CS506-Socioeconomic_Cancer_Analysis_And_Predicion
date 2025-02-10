@@ -1,8 +1,6 @@
-BU CS 506: Data Science Tools and Applications
+BU CS 506: Data Science Tools and Applications<br>Lance Galletti
 
-Lance Galletti
-
-Xinyu Li, Wenshou He & Benjamin Pfeiffer
+Xinyu Li, Wenshou He, and Benjamin Pfeiffer
 
 Monday, February 10<sup>th</sup>, 2025
 
