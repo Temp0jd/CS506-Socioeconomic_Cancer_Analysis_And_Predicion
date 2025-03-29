@@ -98,3 +98,13 @@ To validate the findings and ensure model robustness:
 - Write final project report summarizing methods, results, and conclusions
 - Create a presentation with key insights and visualizations
 - Conduct peer reviews and finalize all deliverables
+
+## Midterm Report
+
+Preliminary visualizations of data.
+
+Detailed description of data processing done so far.
+
+Detailed description of data modeling methods used so far.
+
+Preliminary results. (e.g. we fit a linear model to the data and we achieve promising results, or we did some clustering and we notice a clear pattern in the data)
