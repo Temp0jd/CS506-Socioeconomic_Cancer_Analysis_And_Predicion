@@ -103,9 +103,39 @@ To validate the findings and ensure model robustness:
 
 ## Preliminary visualizations of data
 
+### Correlation Heatmap
+![Correlation Heatmap](plot/correlation_heatmap.png)
+
+### Poverty Rate vs Cancer Deaths
+![Poverty vs Deaths](plot/poverty_vs_deaths.png)
+
+### Cancer Deaths Across U.S. Regions
+![Cancer Deaths Across U.S. Regions](plot/Cancer_deaths_regions.png)
 
 ## Data processing Tasks
+### Data Collection and Preprocessing
+- **Data Sources**: 
+  - `cancer_reg.csv` - Cancer-related statistics.
+  - `avg-household-size.csv` - Household size data.
+- **Data Cleaning**:
+  - Stripped column names of extra spaces and converted to lowercase.
+  - Merged datasets based on the `geography` column.
+  - Extracted `county` and `state` from the `geography` column.
+  - Removed less relevant columns such as `index`, `studypercap`, `percentmarried`, etc.
 
+### Correlation Analysis and Initial Modeling
+- **Exploratory Data Analysis (EDA)**:
+  - Computed correlations between various features and `avgdeathsperyear`.
+  - Visualized the correlation matrix using a heatmap.
+  - Plotted scatter plots to examine relationships between `povertypercent`, `education`, and cancer deaths.
+- **Regression Modeling**:
+  - Selected key independent variables based on correlation analysis.
+  - Fitted a linear regression model to predict `avgdeathsperyear`.
+  - Evaluated model performance using R-squared and residual analysis.
+  - Identified potential non-linearity in relationships, indicating possible improvements with advanced regression techniques.
+- **Feature Engineering**:
+  - Created a new `region` variable by mapping states into broader regions.
+  - Identified strong and weak correlations between socioeconomic factors and cancer mortality rates.
 
 ## Data Modeling Methods: XGBoost
 - **Algorithm:** `XGBRegressor` from the `xgboost.sklearn` package.  
@@ -117,10 +147,25 @@ To validate the findings and ensure model robustness:
 - **Pipeline Integration:** The preprocessing steps, such as encoding categorical features and scaling numerical features, were included in a `Pipeline` to ensure the consistency of transformations during both training and prediction phases.  
 - **Model Evaluation:** We used a separate validation set (`X_test` and `y_test`) to evaluate model performance.
 
-### Next Steps  
+## Preliminary Results
+- **Correlation Analysis**:
+  - Strong positive correlation between poverty rate and cancer deaths.
+  - Moderate negative correlation between higher education rates and cancer deaths.
+- **Data Trends**:
+  - States with higher poverty percentages tend to have higher average deaths per year.
+  - Regions with higher educational attainment show slightly lower cancer mortality rates.
+- **Regression Model**:
+  - The model shows that poverty rate has a significant positive coefficient, indicating a strong association with cancer mortality.
+  - Adjusted R-squared value suggests a moderate fit, indicating potential for further feature refinement.
+  - Residual analysis shows some non-linearity, suggesting possible improvements with polynomial terms or interaction effects.
+- **XGBoost**:
+  - The XGBoost model showed promising results in terms of accuracy and predictive performance.
+  - By incorporating early stopping and tuning hyperparameters such as the number of estimators and the learning rate, we were able to achieve reasonable predictions with minimal overfitting.
+- **Current Issue**:
+  - Feature selection needed to be refined based on correlation findings.
+  - Consider additional socioeconomic or healthcare-related features for deeper insights.
+
+## Next Steps  
 - Hyperparameter tuning of the XGBoost model to improve performance using cross-validation.
 - Feature selection to refine the model and potentially enhance prediction accuracy.
 - Further evaluation on the test set to validate generalization ability of the model.
-
-## Preliminary Results
-- The XGBoost model showed promising results in terms of accuracy and predictive performance. By incorporating early stopping and tuning hyperparameters such as the number of estimators and the learning rate, we were able to achieve reasonable predictions with minimal overfitting.
