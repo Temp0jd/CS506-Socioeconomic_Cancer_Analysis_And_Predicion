@@ -99,12 +99,28 @@ To validate the findings and ensure model robustness:
 - Create a presentation with key insights and visualizations
 - Conduct peer reviews and finalize all deliverables
 
-## Midterm Report
+# Midterm Report
 
-Preliminary visualizations of data.
+## Preliminary visualizations of data
 
-Detailed description of data processing done so far.
 
-Detailed description of data modeling methods used so far.
+## Data processing Tasks
 
-Preliminary results. (e.g. we fit a linear model to the data and we achieve promising results, or we did some clustering and we notice a clear pattern in the data)
+
+## Data Modeling Methods: XGBoost
+- **Algorithm:** `XGBRegressor` from the `xgboost.sklearn` package.  
+- **Purpose:** We applied XGBoost due to its efficiency and performance in handling complex datasets with non-linear relationships. This model provides great flexibility and can handle large datasets with many features.  
+- **Parameters:**  
+  - `n_estimators=1000`: We chose a high number of estimators to ensure enough boosting rounds to capture the complexity of the data.
+  - `learning_rate=0.1`: A moderate learning rate was chosen to prevent overshooting during training.
+  - `early_stopping_rounds=5`: We implemented early stopping to avoid overfitting by stopping training when the performance on the validation set stopped improving.
+- **Pipeline Integration:** The preprocessing steps, such as encoding categorical features and scaling numerical features, were included in a `Pipeline` to ensure the consistency of transformations during both training and prediction phases.  
+- **Model Evaluation:** We used a separate validation set (`X_test` and `y_test`) to evaluate model performance.
+
+### Next Steps  
+- Hyperparameter tuning of the XGBoost model to improve performance using cross-validation.
+- Feature selection to refine the model and potentially enhance prediction accuracy.
+- Further evaluation on the test set to validate generalization ability of the model.
+
+## Preliminary Results
+- The XGBoost model showed promising results in terms of accuracy and predictive performance. By incorporating early stopping and tuning hyperparameters such as the number of estimators and the learning rate, we were able to achieve reasonable predictions with minimal overfitting.
