@@ -113,7 +113,7 @@ Monday, March 31<sup>st</sup>, 2025
 ![Correlation Heatmap](plot/correlation_heatmap.png)
 
 ### Poverty Rate vs Cancer Deaths
-![Poverty vs Deaths](plot/poverty_vs_deaths.png)
+![Poverty vs. Deaths](plot/poverty_vs_deaths.png)
 
 ### Cancer Deaths Across U.S. Regions
 ![Cancer Deaths Across U.S. Regions](plot/Cancer_deaths_regions.png)
