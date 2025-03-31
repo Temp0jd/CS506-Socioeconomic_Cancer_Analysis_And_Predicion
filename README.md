@@ -101,7 +101,7 @@ To validate the findings and ensure model robustness:
 
 # Midterm Report
 
-https://youtu.be/K-PtO1AOkrk
+https://youtu.be/8sEUC1Uwf7Q
 
 BU CS 506: Data Science Tools and Applications  
 Final Project Proposal  
