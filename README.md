@@ -101,6 +101,8 @@ To validate the findings and ensure model robustness:
 
 # Midterm Report
 
+https://youtu.be/K-PtO1AOkrk
+
 BU CS 506: Data Science Tools and Applications  
 Final Project Proposal  
 Lance Galletti  
