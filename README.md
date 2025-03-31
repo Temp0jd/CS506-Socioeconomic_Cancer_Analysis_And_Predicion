@@ -4,7 +4,7 @@ BU CS 506: Data Science Tools and Applications
 Final Project Proposal  
 Lance Galletti  
 Xinyu Li, Wenshou He, Benjamin Pfeiffer  
-Monday, February 10th, 2025
+Monday, February 10<sup>th</sup>, 2025
 
 ## 1. Project Description
 
@@ -100,6 +100,12 @@ To validate the findings and ensure model robustness:
 - Conduct peer reviews and finalize all deliverables
 
 # Midterm Report
+
+BU CS 506: Data Science Tools and Applications  
+Final Project Proposal  
+Lance Galletti  
+Xinyu Li, Wenshou He, Benjamin Pfeiffer  
+Monday, March 31<sup>st</sup>, 2025
 
 ## Preliminary visualizations of data
 
