@@ -104,7 +104,7 @@ To validate the findings and ensure model robustness:
 Midterm Presentation: https://youtu.be/8sEUC1Uwf7Q
 
 BU CS 506: Data Science Tools and Applications  
-Midterm Report 
+Midterm Report  
 Lance Galletti  
 Xinyu Li, Wenshou He, Benjamin Pfeiffer  
 Monday, March 31<sup>st</sup>, 2025
@@ -177,3 +177,82 @@ Monday, March 31<sup>st</sup>, 2025
 - Hyperparameter tuning of the XGBoost model to improve performance using cross-validation.
 - Feature selection to refine the model and potentially enhance prediction accuracy.
 - Further evaluation on the test set to validate generalization ability of the model.
+
+
+
+# Final Report
+
+Final Presentation: linklinklink
+
+BU CS 506: Data Science Tools and Applications  
+Final Report  
+Lance Galletti  
+Xinyu Li, Wenshou He, Benjamin Pfeiffer  
+Monday, April 28<sup>th</sup>, 2025
+
+## 1. How to Build and Run the Code
+
+Follow the steps below to set up the environment, install dependencies, and run the analysis pipeline.
+
+### Environment Setup
+
+All dependencies are listed in the `requirements.txt` file.
+
+To set up the environment:
+
+```bash
+# 1. Fork and clone the repository
+git clone <your-repo-ssh-url>
+cd <your-project-folder>
+
+# 2. Create a virtual environment
+python3 -m venv .venv
+
+# 3. Activate the virtual environment
+# On Linux/Mac
+source .venv/bin/activate
+# On Windows
+.venv\Scripts\activate
+
+# 4. Install all dependencies
+pip install -r requirements.txt
+```
+
+### Makefile 
+
+1. Set up environment and install dependencies
+```bah
+make setup
+```
+
+2. Launch Jupyter Notebook to run the code interactively
+```bash
+make run
+```
+
+
+## 2. Testing and GitHub Workflow
+
+> (Describe test code. Show or link the GitHub Actions workflow file.)
+
+
+
+## 3. Data Visualizations
+
+> (Add plots, interactive dashboards, and brief explanations.)
+
+
+
+
+## 4. Data Processing and Modeling Description
+
+> (Explain data collection, cleaning, feature engineering, model training.)
+
+
+
+
+## 5. Results
+
+> (Summarize results. Include key findings, evaluation metrics, plots.)
+
+
