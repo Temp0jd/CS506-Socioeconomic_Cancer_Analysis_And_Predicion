@@ -112,13 +112,13 @@ Monday, March 31<sup>st</sup>, 2025
 ## Preliminary visualizations of data
 
 ### Correlation Heatmap
-![Correlation Heatmap](plot/correlation_heatmap.png)
+![Correlation Heatmap](plots/correlation_heatmap.png)
 
 ### Poverty Rate vs Cancer Deaths
-![Poverty vs. Deaths](plot/poverty_vs_deaths.png)
+![Poverty vs. Deaths](plots/poverty_vs_deaths.png)
 
 ### Cancer Deaths Across U.S. Regions
-![Cancer Deaths Across U.S. Regions](plot/Cancer_deaths_regions.png)
+![Cancer Deaths Across U.S. Regions](plots/Cancer_deaths_regions.png)
 
 ## Data processing Tasks
 ### Data Collection and Preprocessing
@@ -218,24 +218,64 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Makefile 
+### Makefile Instructions
 
-1. Set up environment and install dependencies
-```bah
+This project provides a `Makefile` to simplify environment setup, dependency management, notebook execution, and testing.
+
+Here are the available commands:
+
+---
+
+1. **Set up environment and install dependencies**
+
+Create a new virtual environment `.venv/`, upgrade pip, and install all required packages from `requirements.txt`:
+
+```bash
 make setup
 ```
 
-2. Launch Jupyter Notebook to run the code interactively
+2. **Launch Jupyter Notebook to run the code interactively**
+
+Start a Jupyter Notebook server to run and explore the project notebooks manually:
+
 ```bash
 make run
 ```
 
+3. **Install dependencies only**
+
+If you already have a virtual environment, you can simply install the project dependencies:
+
+```bash
+make install
+```
+
+4. **Run tests**
+
+Run all test scripts located under the `tests/` directory using `pytest`.
+
+```bash
+make test
+```
+
+5. **Clean the environment**
+
+Remove the virtual environment `.venv/` and temporary files.
+
+```bash
+make clean
+```
 
 ## 2. Testing and GitHub Workflow
 
-> (Describe test code. Show or link the GitHub Actions workflow file.)
+- **Test Scripts:**  
+  Lightweight test cases were created under the `tests/` directory using `pytest`. These tests focus on verifying critical components of the project, such as:
+  - Successful data loading.
+  - Integrity of model prediction outputs (no missing or NaN values).
 
-
+- **GitHub Actions Workflow:**  
+  A GitHub Actions workflow was configured (`.github/workflows/ci.yml`) to automatically run the test suite upon each push or pull request.  
+  The workflow sets up a Python environment, installs project dependencies, and executes `pytest` to ensure the codebase remains functional and reproducible.
 
 ## 3. Data Visualizations
 
