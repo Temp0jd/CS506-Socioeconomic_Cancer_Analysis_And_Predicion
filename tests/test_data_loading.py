@@ -1,9 +1,10 @@
 # tests/test_data_loading.py
-
-# To test there is at least one line of data
+# Test that the linear regression prediction file has data
 
 import pandas as pd
+import os
 
 def test_data_loading():
-    df = pd.read_csv('../data/cleaned_data_week1_2.csv')
-    assert df.shape[0] > 0
+    filepath = os.path.join("data", "linear_regression_predictions.csv")
+    df = pd.read_csv(filepath)
+    assert df.shape[0] > 0, "The data file should contain at least one row."

@@ -1,9 +1,10 @@
 # tests/test_model_output.py
-
-# To test there is no null in predicted result
+# Test that there are no null values in the predicted results
 
 import pandas as pd
+import os
 
 def test_model_predictions():
-    pred = pd.read_csv('../notebooks/linear_regression_predictions.csv')
-    assert pred['Predicted'].notnull().all()
+    filepath = os.path.join("data", "linear_regression_predictions.csv")
+    pred = pd.read_csv(filepath)
+    assert pred['Predicted'].notnull().all(), "Predicted column should not have null values."
