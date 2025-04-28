@@ -5,6 +5,6 @@ import pandas as pd
 import os
 
 def test_data_loading():
-    filepath = os.path.join("data", "linear_regression_predictions.csv")
+    filepath = os.path.join("notebooks", "linear_regression_predictions.csv")
     df = pd.read_csv(filepath)
     assert df.shape[0] > 0, "The data file should contain at least one row."
