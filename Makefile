@@ -26,10 +26,12 @@ install:
 # Run tests
 .PHONY: test
 test:
-	$(ENV_DIR)/bin/pytest_tests/
+	source $(ENV_DIR)/bin/activate && \
+	pytest tests/
 
 # Clean the environment and temp files
 .PHONY: clean
 clean:
 	rm -rf $(ENV_DIR)
 	rm -rf __pycache__ .ipynb_checkpoints
+	rm -rf notebooks/__pycache__

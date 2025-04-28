@@ -224,8 +224,6 @@ This project provides a `Makefile` to simplify environment setup, dependency man
 
 Here are the available commands:
 
----
-
 1. **Set up environment and install dependencies**
 
 Create a new virtual environment `.venv/`, upgrade pip, and install all required packages from `requirements.txt`:
@@ -279,10 +277,22 @@ make clean
 
 ## 3. Data Visualizations
 
-> (Add plots, interactive dashboards, and brief explanations.)
+This section presents key visualizations used to explore the relationships between socioeconomic factors and cancer incidence and mortality.
 
+### Correlation Matrix
 
+<p align="center">
+  <img src="plots/correlation_heatmap.png" width="750"/>
+</p>
 
+The correlation matrix above visualizes pairwise correlations between socioeconomic indicators and cancer-related variables.  
+
+Key observations include:
+
+- Strong positive correlation between `avganncount` (average annual cancer cases) and `avgdeathsperyear`.
+- Moderate negative correlation between `povertypercent` and `median income`, suggesting areas with higher poverty levels tend to have lower median incomes.
+
+The correlation patterns identified here help inform feature selection and model interpretation in later stages of the analysis.
 
 ## 4. Data Processing and Modeling Description
 
@@ -295,4 +305,8 @@ make clean
 
 > (Summarize results. Include key findings, evaluation metrics, plots.)
 
-
+- Goals:
+- **Analyze the correlation** between socioeconomic factors and cancer rates
+- **Determine the statistical significance** of income and poverty levels on cancer incidence and mortality
+- **Apply hypothesis testing and regression models** to quantify relationships
+- **Visualize findings** using effective data visualizations
