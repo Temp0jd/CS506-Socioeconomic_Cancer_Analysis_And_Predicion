@@ -13,7 +13,7 @@ setup:
 .PHONY: run
 run:
 	source $(ENV_DIR)/bin/activate && \
-	jupyter nbconvert --to notebook --execute notebooks/week1-2 --inplace && \
+	jupyter nbconvert --to notebook --execute notebooks/week1-2.ipynb --inplace && \
 	jupyter nbconvert --to notebook --execute notebooks/week3-4.ipynb --inplace && \
 	jupyter nbconvert --to notebook --execute notebooks/week5-6.ipynb --inplace && \
 	jupyter nbconvert --to notebook --execute notebooks/week7-8.ipynb --inplace
