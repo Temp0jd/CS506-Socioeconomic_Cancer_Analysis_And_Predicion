@@ -7,3 +7,6 @@ xgboost
 pytest
 geopandas
 requests
+plotly
+nbformat
+statsmodels

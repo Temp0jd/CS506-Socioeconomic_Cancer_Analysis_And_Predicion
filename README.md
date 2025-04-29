@@ -285,14 +285,17 @@ This section presents key visualizations used to explore the relationships betwe
   <img src="plots/correlation_heatmap.png" width="750"/>
 </p>
 
-The correlation matrix above visualizes pairwise correlations between socioeconomic indicators and cancer-related variables.  
+The **correlation matrix** above visualizes pairwise correlations between socioeconomic indicators and cancer-related variables.  
 
-Key observations include:
+**Key observations:**
+- A strong positive correlation exists between `avganncount` (average annual cancer cases) and `avgdeathsperyear`, suggesting consistent cancer mortality patterns.
+- A moderate **negative correlation** is observed between `povertypercent` and `median income`, confirming that counties with higher poverty levels tend to have lower median incomes.
+- Educational attainment, employment rate, and insurance coverage also show meaningful associations with cancer-related outcomes.
 
-- Strong positive correlation between `avganncount` (average annual cancer cases) and `avgdeathsperyear`.
-- Moderate negative correlation between `povertypercent` and `median income`, suggesting areas with higher poverty levels tend to have lower median incomes.
-
-The correlation patterns identified here help inform feature selection and model interpretation in later stages of the analysis.
+**Technical notes:**
+- Input data was derived from a cleaned dataset (`cleaned_data_week1_2.csv`).
+- The correlation matrix was computed using Pearson's method and visualized with Seaborn’s `heatmap()` function.
+- Insights from this matrix informed both **feature selection** and **model interpretation** in subsequent stages.
 
 ### 3.2 Cancer Mortality Rate by State
 
@@ -300,33 +303,39 @@ The correlation patterns identified here help inform feature selection and model
   <img src="plots/cancer_mortality_by_state.png" width="800"/>
 </p>
 
-This choropleth map visualizes the cancer mortality rate (deaths per 100,000 population) across U.S. states.  
-Each state is shaded according to its reported cancer death rate, with darker colors indicating higher mortality.
+This choropleth map visualizes the **cancer mortality rate** (deaths per 100,000 population) across U.S. states.  
+Darker red shades indicate higher death rates. The data is aggregated from county-level estimates and grouped by state averages.
 
 **Key observations:**
-- States in the Southeast, including Mississippi, Alabama, and Kentucky, tend to have higher cancer mortality rates.
-- This geographic trend reinforces existing public health research about disparities in healthcare access and socioeconomic conditions across regions.
+- States in the South and Midwest, such as **Mississippi**, **Kentucky**, and **West Virginia**, exhibit notably high mortality rates.
+- Western and Northeastern states tend to have comparatively lower death rates.
+- These patterns align with known socioeconomic and healthcare access disparities in the U.S.
+
+**Interactive Features (via Plotly):**
+- The map is implemented using Plotly's interactive `choropleth` function.
+- When run inside the Jupyter Notebook (`notebooks/interactive_viz.ipynb`), users can:
+  - **Hover** over each state to view the exact death rate.
+  - **Zoom** or **pan** for closer examination.
+  - **Access tooltips** that dynamically display state-level metrics.
 
 **Technical notes:**
-- Geospatial mapping was done using GeoPandas.
-- Shapefile source: U.S. Census Bureau 2018 TIGER/Line shapefiles.
-- `death_rate` was calculated and merged with shapefile data for state-level visualization.
+- Data Source: Aggregated from `cleaned_data_week1_2.csv` (county-level).
+- Visualization Tool: `plotly.express.choropleth()` with USA-states location mode.
+- Output Image: `plots/cancer_mortality_by_state.png`
 
-### 3.3 Top 15 States by Average Cancer Deaths
+### 3.3 Interactive Visualizations
 
-<p align="center">
-  <img src="plots/top15_states_avg_deaths.png" width="600"/>
-</p>
+To enable dynamic exploration of trends in cancer mortality and socioeconomic indicators, we implemented interactive plots using Plotly.
 
-This bar chart highlights the top 15 states with the highest average number of annual cancer deaths.
+- **Interactive Choropleth Map:**  
+  Users can zoom, pan, and hover over each U.S. state to view its cancer mortality rate per 100,000 residents.
 
-**Key insights:**
-- California, and Florida rank among the top due to both their large population sizes and relatively high cancer mortality rates.
-- Other high-ranking states like Pennsylvania and Ohio reflect not just population but possibly environmental and socioeconomic factors.
+- **Interactive Scatter Plot:**  
+  Displays the relationship between poverty rate and average cancer deaths. Hovering reveals state details, and a trendline highlights the overall pattern.
 
-This visualization complements the choropleth map by providing absolute comparisons rather than rate-based ones.
+> For interactive versions of the plots, see: `notebooks/interactive_viz.ipynb` - (Preparation of the environment is needed before running the code)
 
-### Summary of Visualizations
+### 3.4 Summary of Visualizations
 Some plots are explained in the `Results` section.
 
 | Visualization | Format | Insight |
