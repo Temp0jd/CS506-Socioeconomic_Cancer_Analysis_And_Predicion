@@ -112,13 +112,19 @@ Monday, March 31<sup>st</sup>, 2025
 ## Preliminary visualizations of data
 
 ### Correlation Heatmap
-![Correlation Heatmap](plots/correlation_heatmap.png)
+<p align="center">
+  <img src="plots/correlation_heatmap.png" width="750"/>
+</p>
 
 ### Poverty Rate vs Cancer Deaths
-![Poverty vs. Deaths](plots/poverty_vs_deaths.png)
+<p align="center">
+  <img src="plots/poverty_vs_deaths.png" width="750"/>
+</p>
 
 ### Cancer Deaths Across U.S. Regions
-![Cancer Deaths Across U.S. Regions](plots/Cancer_deaths_regions.png)
+<p align="center">
+  <img src="plots/Cancer_deaths_regions.png" width="750"/>
+</p>
 
 ## Data processing Tasks
 ### Data Collection and Preprocessing
@@ -266,39 +272,110 @@ make clean
 
 ## 2. Testing and GitHub Workflow
 
-- **Test Scripts:**  
-  Lightweight test cases were created under the `tests/` directory using `pytest`. These tests focus on verifying critical components of the project, such as:
-  - Successful data loading.
-  - Integrity of model prediction outputs (no missing or NaN values).
+To ensure the reproducibility and robustness of the project, we implemented tests under the `tests/` directory using `pytest`.
 
-- **GitHub Actions Workflow:**  
-  A GitHub Actions workflow was configured (`.github/workflows/ci.yml`) to automatically run the test suite upon each push or pull request.  
-  The workflow sets up a Python environment, installs project dependencies, and executes `pytest` to ensure the codebase remains functional and reproducible.
+The tests are designed not only to check data existence or basic value correctness, but also to verify that the core pipeline runs correctly given a snippet of the expected data format.
+
+### Test Scripts
+
+- `test_data_loading.py`  
+  Verifies that the prediction output file (`linear_regression_predictions.csv`) can be loaded successfully and contains expected data.
+
+- `test_model_output.py`  
+  Checks that the model output includes a `Predicted` column and that it contains no missing (NaN) values.
+
+- `test_pipeline_run.py`  
+  Simulates a small sample input with the expected structure (e.g., `povertypercent`, `medincome`, `popest2015`, `avgdeathsperyear`) and validates that the preprocessing and modeling pipeline runs without errors.  
+  This test helps catch issues such as:
+  - Missing or renamed columns
+  - Changed data types or unexpected formats
+  - Silent logic failures during training or prediction
+
+### GitHub Actions Workflow
+
+A GitHub Actions workflow (`.github/workflows/ci.yml`) is configured to automatically:
+
+1. Set up a Python environment with dependencies listed in `requirements.txt`
+2. Run the full test suite using `pytest`
+
+This continuous integration workflow ensures that any new commits are automatically checked for functionality and data consistency, helping maintain the project's reliability over time.
 
 ## 3. Data Visualizations
 
 This section presents key visualizations used to explore the relationships between socioeconomic factors and cancer incidence and mortality.
 
-### Correlation Matrix
+### 3.1 Correlation Matrix
 
 <p align="center">
   <img src="plots/correlation_heatmap.png" width="750"/>
 </p>
 
-The correlation matrix above visualizes pairwise correlations between socioeconomic indicators and cancer-related variables.  
+The **correlation matrix** above visualizes pairwise correlations between socioeconomic indicators and cancer-related variables.  
 
-Key observations include:
+**Key observations:**
+- A strong positive correlation exists between `avganncount` (average annual cancer cases) and `avgdeathsperyear`, suggesting consistent cancer mortality patterns.
+- A moderate **negative correlation** is observed between `povertypercent` and `median income`, confirming that counties with higher poverty levels tend to have lower median incomes.
+- Educational attainment, employment rate, and insurance coverage also show meaningful associations with cancer-related outcomes.
 
-- Strong positive correlation between `avganncount` (average annual cancer cases) and `avgdeathsperyear`.
-- Moderate negative correlation between `povertypercent` and `median income`, suggesting areas with higher poverty levels tend to have lower median incomes.
+**Technical notes:**
+- Input data was derived from a cleaned dataset (`cleaned_data_week1_2.csv`).
+- The correlation matrix was computed using Pearson's method and visualized with Seaborn’s `heatmap()` function.
+- Insights from this matrix informed both **feature selection** and **model interpretation** in subsequent stages.
 
-The correlation patterns identified here help inform feature selection and model interpretation in later stages of the analysis.
+### 3.2 Cancer Mortality Rate by State
+
+<p align="center">
+  <img src="plots/cancer_mortality_by_state.png" width="800"/>
+</p>
+
+This choropleth map visualizes the **cancer mortality rate** (deaths per 100,000 population) across U.S. states.  
+Darker red shades indicate higher death rates. The data is aggregated from county-level estimates and grouped by state averages.
+
+**Key observations:**
+- States in the South and Midwest, such as **Mississippi**, **Kentucky**, and **West Virginia**, exhibit notably high mortality rates.
+- Western and Northeastern states tend to have comparatively lower death rates.
+- These patterns align with known socioeconomic and healthcare access disparities in the U.S.
+
+**Interactive Features (via Plotly):**
+- The map is implemented using Plotly's interactive `choropleth` function.
+- When run inside the Jupyter Notebook (`notebooks/interactive_viz.ipynb`), users can:
+  - **Hover** over each state to view the exact death rate.
+  - **Zoom** or **pan** for closer examination.
+  - **Access tooltips** that dynamically display state-level metrics.
+
+**Technical notes:**
+- Data Source: Aggregated from `cleaned_data_week1_2.csv` (county-level).
+- Visualization Tool: `plotly.express.choropleth()` with USA-states location mode.
+- Output Image: `plots/cancer_mortality_by_state.png`
+
+### 3.3 Interactive Visualizations
+
+To enable dynamic exploration of trends in cancer mortality and socioeconomic indicators, we implemented interactive plots using Plotly.
+
+- **Interactive Choropleth Map:**  
+  Users can zoom, pan, and hover over each U.S. state to view its cancer mortality rate per 100,000 residents.
+
+- **Interactive Scatter Plot:**  
+  Displays the relationship between poverty rate and average cancer deaths. Hovering reveals state details, and a trendline highlights the overall pattern.
+
+> For interactive versions of the plots, see: `notebooks/interactive_viz.ipynb` - (Preparation of the environment is needed before running the code)
+
+### 3.4 Summary of Visualizations
+Some plots are explained in the `Results` section.
+
+| Visualization | Format | Insight |
+|---------------|--------|---------|
+| Correlation Matrix | Heatmap | Reveals feature relationships |
+| Poverty vs. Cancer Deaths | Scatter | Shows poverty-related trends |
+| Cancer Mortality by Region | Bar Chart | Exposes regional disparities |
+| Cancer Mortality by State | Choropleth | Visualizes geographic risk |
+| Top 15 States by Deaths | Bar Chart | Compares high-death states |
+| Feature Importance | Bar Chart | Highlights key predictors |
+| Residual Plot | Scatter | Validates model behavior |
 
 ## 4. Data Processing and Modeling Description
 
-This section summarizes the full data processing and modeling workflow from Week 1–8, based on the actual Jupyter notebooks.
-
----
+This section summarizes the full data processing and modeling workflow from Week 1–8.
 
 ### 4.1 Week 1–2: Data Collection and Preprocessing
 
@@ -325,8 +402,6 @@ This section summarizes the full data processing and modeling workflow from Week
   - Plotted histograms and boxplots to explore distributions.
   - Generated a correlation heatmap (`plots/correlation_heatmap.png`) to examine variable relationships.
 
----
-
 ### 4.2 Week 3–4: Exploratory Data Analysis and Baseline Modeling
 
 - **Exploratory Data Analysis (EDA)**
@@ -344,8 +419,6 @@ This section summarizes the full data processing and modeling workflow from Week
 - **Visualization**
   - Scatter plot showing poverty rate vs. cancer deaths (`plots/poverty_vs_deaths.png`).
   - Regional cancer deaths summarized in bar charts (`plots/Cancer_deaths_regions.png`).
-
----
 
 ### 4.3 Week 5–6: Feature Engineering and Model Enhancement
 
@@ -370,8 +443,6 @@ This section summarizes the full data processing and modeling workflow from Week
     - Computed Test MAE and Test R².
   - Feature importance plot generated (`plots/feature_importance.png`).
 
----
-
 ### 4.4 Week 7–8: Final Model Tuning and Visualization
 
 - **Hyperparameter Tuning**
@@ -387,8 +458,6 @@ This section summarizes the full data processing and modeling workflow from Week
   - Higher educational attainment correlated with lower cancer deaths.
   - Regional disparities were evident, with the South having higher mortality rates.
 
----
-
 ### Key Visual Outputs
 
 - **Feature Importance Bar Plot** (`plots/feature_importance.png`)
@@ -396,8 +465,6 @@ This section summarizes the full data processing and modeling workflow from Week
 
 - **Residual vs. Predicted Scatter Plot** (`plots/residuals_plot.png`)
   - Checks homoscedasticity and linearity assumptions visually.
-
----
 
 ### Summary
 
@@ -408,51 +475,49 @@ Throughout Weeks 1–8, we progressively enhanced the pipeline:
 
 All results directly support the project goals of analyzing the impact of socioeconomic factors on cancer outcomes.
 
-
-
-
-
 ## Results
 
 ## Poverty vs Cancer Deaths
 
-![Poverty vs Deaths](plots/poverty_vs_deaths.png)
+<p align="center">
+  <img src="plots/poverty_vs_deaths.png" width="750"/>
+</p>
 
 **Observation:**  
 There is a positive correlation: counties with higher poverty rates tend to experience more cancer-related deaths. However, the distribution shows significant variance, suggesting that poverty is an important but not exclusive factor influencing cancer mortality.
 
----
-
 ## Education vs Cancer Deaths
 
-![Education vs Deaths](plots/education_vs_deaths.png)
+<p align="center">
+  <img src="plots/education_vs_deaths.png" width="750"/>
+</p>
 
 **Observation:**  
 A general negative trend is observed: regions with higher education levels typically have fewer cancer deaths. However, there is notable dispersion, indicating that other demographic and socioeconomic factors also play a role.
 
----
-
 ## Correlation Heatmap
 
-![Correlation Heatmap](plots/correlation_heatmap.png)
+<p align="center">
+  <img src="plots/correlation_heatmap.png" width="750"/>
+</p>
 
 **Observation:**  
 The heatmap reveals expected relationships, such as a strong negative correlation between poverty and income, and positive correlations between education and private health insurance coverage. These inter-feature relationships provide valuable context for model feature selection.
 
----
-
 ## Cancer Deaths by Region
 
-![Cancer Deaths by Region](plots/Cancer_deaths_regions.png)
+<p align="center">
+  <img src="plots/Cancer_deaths_regions.png" width="750"/>
+</p>
 
 **Observation:**  
 The Southern region tends to have the highest average cancer death rates among the major U.S. regions. This finding aligns with known regional health disparities often attributed to socioeconomic factors and healthcare access.
 
----
-
 ## Feature Importance (XGBoost Model)
 
-![Feature Importance](plots/feature_importance.png)
+<p align="center">
+  <img src="plots/feature_importance.png" width="750"/>
+</p>
 
 **Note on Feature Names:**  
 Feature names are displayed as "F0", "F1", etc., due to preprocessing transformations removing original feature labels during pipeline execution.  
@@ -474,14 +539,12 @@ The mapping from Feature ID to original feature name is:
 **Observation:**  
 Key socioeconomic factors such as population size, median income, and educational attainment levels dominate the model's feature importance rankings, reinforcing the results observed during exploratory data analysis.
 
----
-
 ## Residuals Analysis
 
-![Residuals Plot](plots/residual_plot.png)
+<p align="center">
+  <img src="plots/residual_plot.png" width="750"/>
+</p>
 
 **Observation:**  
 Most residuals are centered closely around zero, suggesting that the model’s predictions are generally unbiased across different predicted death counts.  
 However, a few large residuals appear at very high predicted death counts (>4000), indicating the model's difficulty in accurately predicting rare extreme cases. Overall, the residual pattern supports the validity of the model for general population-level predictions.
-
----
