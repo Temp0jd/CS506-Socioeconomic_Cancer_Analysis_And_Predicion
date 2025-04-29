@@ -279,7 +279,7 @@ make clean
 
 This section presents key visualizations used to explore the relationships between socioeconomic factors and cancer incidence and mortality.
 
-### Correlation Matrix
+### 3.1 Correlation Matrix
 
 <p align="center">
   <img src="plots/correlation_heatmap.png" width="750"/>
@@ -294,11 +294,54 @@ Key observations include:
 
 The correlation patterns identified here help inform feature selection and model interpretation in later stages of the analysis.
 
+### 3.2 Cancer Mortality Rate by State
+
+<p align="center">
+  <img src="plots/cancer_mortality_by_state.png" width="800"/>
+</p>
+
+This choropleth map visualizes the cancer mortality rate (deaths per 100,000 population) across U.S. states.  
+Each state is shaded according to its reported cancer death rate, with darker colors indicating higher mortality.
+
+**Key observations:**
+- States in the Southeast, including Mississippi, Alabama, and Kentucky, tend to have higher cancer mortality rates.
+- This geographic trend reinforces existing public health research about disparities in healthcare access and socioeconomic conditions across regions.
+
+**Technical notes:**
+- Geospatial mapping was done using GeoPandas.
+- Shapefile source: U.S. Census Bureau 2018 TIGER/Line shapefiles.
+- `death_rate` was calculated and merged with shapefile data for state-level visualization.
+
+### 3.3 Top 15 States by Average Cancer Deaths
+
+<p align="center">
+  <img src="plots/top15_states_avg_deaths.png" width="600"/>
+</p>
+
+This bar chart highlights the top 15 states with the highest average number of annual cancer deaths.
+
+**Key insights:**
+- California, and Florida rank among the top due to both their large population sizes and relatively high cancer mortality rates.
+- Other high-ranking states like Pennsylvania and Ohio reflect not just population but possibly environmental and socioeconomic factors.
+
+This visualization complements the choropleth map by providing absolute comparisons rather than rate-based ones.
+
+### Summary of Visualizations
+Some plots are explained in the `Results` section.
+
+| Visualization | Format | Insight |
+|---------------|--------|---------|
+| Correlation Matrix | Heatmap | Reveals feature relationships |
+| Poverty vs. Cancer Deaths | Scatter | Shows poverty-related trends |
+| Cancer Mortality by Region | Bar Chart | Exposes regional disparities |
+| Cancer Mortality by State | Choropleth | Visualizes geographic risk |
+| Top 15 States by Deaths | Bar Chart | Compares high-death states |
+| Feature Importance | Bar Chart | Highlights key predictors |
+| Residual Plot | Scatter | Validates model behavior |
+
 ## 4. Data Processing and Modeling Description
 
-This section summarizes the full data processing and modeling workflow from Week 1–8, based on the actual Jupyter notebooks.
-
----
+This section summarizes the full data processing and modeling workflow from Week 1–8.
 
 ### 4.1 Week 1–2: Data Collection and Preprocessing
 
@@ -325,8 +368,6 @@ This section summarizes the full data processing and modeling workflow from Week
   - Plotted histograms and boxplots to explore distributions.
   - Generated a correlation heatmap (`plots/correlation_heatmap.png`) to examine variable relationships.
 
----
-
 ### 4.2 Week 3–4: Exploratory Data Analysis and Baseline Modeling
 
 - **Exploratory Data Analysis (EDA)**
@@ -344,8 +385,6 @@ This section summarizes the full data processing and modeling workflow from Week
 - **Visualization**
   - Scatter plot showing poverty rate vs. cancer deaths (`plots/poverty_vs_deaths.png`).
   - Regional cancer deaths summarized in bar charts (`plots/Cancer_deaths_regions.png`).
-
----
 
 ### 4.3 Week 5–6: Feature Engineering and Model Enhancement
 
@@ -370,8 +409,6 @@ This section summarizes the full data processing and modeling workflow from Week
     - Computed Test MAE and Test R².
   - Feature importance plot generated (`plots/feature_importance.png`).
 
----
-
 ### 4.4 Week 7–8: Final Model Tuning and Visualization
 
 - **Hyperparameter Tuning**
@@ -387,8 +424,6 @@ This section summarizes the full data processing and modeling workflow from Week
   - Higher educational attainment correlated with lower cancer deaths.
   - Regional disparities were evident, with the South having higher mortality rates.
 
----
-
 ### Key Visual Outputs
 
 - **Feature Importance Bar Plot** (`plots/feature_importance.png`)
@@ -396,8 +431,6 @@ This section summarizes the full data processing and modeling workflow from Week
 
 - **Residual vs. Predicted Scatter Plot** (`plots/residuals_plot.png`)
   - Checks homoscedasticity and linearity assumptions visually.
-
----
 
 ### Summary
 
@@ -408,10 +441,6 @@ Throughout Weeks 1–8, we progressively enhanced the pipeline:
 
 All results directly support the project goals of analyzing the impact of socioeconomic factors on cancer outcomes.
 
-
-
-
-
 ## Results
 
 ## Poverty vs Cancer Deaths
@@ -421,16 +450,12 @@ All results directly support the project goals of analyzing the impact of socioe
 **Observation:**  
 There is a positive correlation: counties with higher poverty rates tend to experience more cancer-related deaths. However, the distribution shows significant variance, suggesting that poverty is an important but not exclusive factor influencing cancer mortality.
 
----
-
 ## Education vs Cancer Deaths
 
 ![Education vs Deaths](plots/education_vs_deaths.png)
 
 **Observation:**  
 A general negative trend is observed: regions with higher education levels typically have fewer cancer deaths. However, there is notable dispersion, indicating that other demographic and socioeconomic factors also play a role.
-
----
 
 ## Correlation Heatmap
 
@@ -439,16 +464,12 @@ A general negative trend is observed: regions with higher education levels typic
 **Observation:**  
 The heatmap reveals expected relationships, such as a strong negative correlation between poverty and income, and positive correlations between education and private health insurance coverage. These inter-feature relationships provide valuable context for model feature selection.
 
----
-
 ## Cancer Deaths by Region
 
 ![Cancer Deaths by Region](plots/Cancer_deaths_regions.png)
 
 **Observation:**  
 The Southern region tends to have the highest average cancer death rates among the major U.S. regions. This finding aligns with known regional health disparities often attributed to socioeconomic factors and healthcare access.
-
----
 
 ## Feature Importance (XGBoost Model)
 
@@ -474,8 +495,6 @@ The mapping from Feature ID to original feature name is:
 **Observation:**  
 Key socioeconomic factors such as population size, median income, and educational attainment levels dominate the model's feature importance rankings, reinforcing the results observed during exploratory data analysis.
 
----
-
 ## Residuals Analysis
 
 ![Residuals Plot](plots/residual_plot.png)
@@ -483,5 +502,3 @@ Key socioeconomic factors such as population size, median income, and educationa
 **Observation:**  
 Most residuals are centered closely around zero, suggesting that the model’s predictions are generally unbiased across different predicted death counts.  
 However, a few large residuals appear at very high predicted death counts (>4000), indicating the model's difficulty in accurately predicting rare extreme cases. Overall, the residual pattern supports the validity of the model for general population-level predictions.
-
----
