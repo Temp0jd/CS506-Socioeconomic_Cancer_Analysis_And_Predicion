@@ -112,13 +112,19 @@ Monday, March 31<sup>st</sup>, 2025
 ## Preliminary visualizations of data
 
 ### Correlation Heatmap
-![Correlation Heatmap](plots/correlation_heatmap.png)
+<p align="center">
+  <img src="plots/correlation_heatmap.png" width="750"/>
+</p>
 
 ### Poverty Rate vs Cancer Deaths
-![Poverty vs. Deaths](plots/poverty_vs_deaths.png)
+<p align="center">
+  <img src="plots/poverty_vs_deaths.png" width="750"/>
+</p>
 
 ### Cancer Deaths Across U.S. Regions
-![Cancer Deaths Across U.S. Regions](plots/Cancer_deaths_regions.png)
+<p align="center">
+  <img src="plots/Cancer_deaths_regions.png" width="750"/>
+</p>
 
 ## Data processing Tasks
 ### Data Collection and Preprocessing
@@ -454,35 +460,45 @@ All results directly support the project goals of analyzing the impact of socioe
 
 ## Poverty vs Cancer Deaths
 
-![Poverty vs Deaths](plots/poverty_vs_deaths.png)
+<p align="center">
+  <img src="plots/poverty_vs_deaths.png" width="750"/>
+</p>
 
 **Observation:**  
 There is a positive correlation: counties with higher poverty rates tend to experience more cancer-related deaths. However, the distribution shows significant variance, suggesting that poverty is an important but not exclusive factor influencing cancer mortality.
 
 ## Education vs Cancer Deaths
 
-![Education vs Deaths](plots/education_vs_deaths.png)
+<p align="center">
+  <img src="plots/education_vs_deaths.png" width="750"/>
+</p>
 
 **Observation:**  
 A general negative trend is observed: regions with higher education levels typically have fewer cancer deaths. However, there is notable dispersion, indicating that other demographic and socioeconomic factors also play a role.
 
 ## Correlation Heatmap
 
-![Correlation Heatmap](plots/correlation_heatmap.png)
+<p align="center">
+  <img src="plots/correlation_heatmap.png" width="750"/>
+</p>
 
 **Observation:**  
 The heatmap reveals expected relationships, such as a strong negative correlation between poverty and income, and positive correlations between education and private health insurance coverage. These inter-feature relationships provide valuable context for model feature selection.
 
 ## Cancer Deaths by Region
 
-![Cancer Deaths by Region](plots/Cancer_deaths_regions.png)
+<p align="center">
+  <img src="plots/Cancer_deaths_regions.png" width="750"/>
+</p>
 
 **Observation:**  
 The Southern region tends to have the highest average cancer death rates among the major U.S. regions. This finding aligns with known regional health disparities often attributed to socioeconomic factors and healthcare access.
 
 ## Feature Importance (XGBoost Model)
 
-![Feature Importance](plots/feature_importance.png)
+<p align="center">
+  <img src="plots/feature_importance.png" width="750"/>
+</p>
 
 **Note on Feature Names:**  
 Feature names are displayed as "F0", "F1", etc., due to preprocessing transformations removing original feature labels during pipeline execution.  
@@ -506,7 +522,9 @@ Key socioeconomic factors such as population size, median income, and educationa
 
 ## Residuals Analysis
 
-![Residuals Plot](plots/residual_plot.png)
+<p align="center">
+  <img src="plots/residual_plot.png" width="750"/>
+</p>
 
 **Observation:**  
 Most residuals are centered closely around zero, suggesting that the model’s predictions are generally unbiased across different predicted death counts.  
