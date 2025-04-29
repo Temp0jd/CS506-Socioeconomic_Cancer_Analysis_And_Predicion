@@ -296,17 +296,170 @@ The correlation patterns identified here help inform feature selection and model
 
 ## 4. Data Processing and Modeling Description
 
-> (Explain data collection, cleaning, feature engineering, model training.)
+This section summarizes the full data processing and modeling workflow from Week 1–8, based on the actual Jupyter notebooks.
+
+---
+
+### 4.1 Week 1–2: Data Collection and Preprocessing
+
+- **Data Loading**
+  - Loaded `cancer_reg.csv` containing cancer statistics.
+  - Loaded `avg-household-size.csv` containing average household size by geography.
+
+- **Data Cleaning**
+  - Stripped whitespace from column names and converted them to lowercase.
+  - Merged datasets using `geography` as the key.
+  - Extracted `state` and `county` information from `geography`.
+  - Dropped irrelevant columns (e.g., `binnedinc`, `studypercap`, `percentmarried`).
+  - Checked and handled missing values:
+    - Removed columns with excessive missingness.
+    - Imputed remaining missing values using the median strategy.
+
+- **Feature Engineering**
+  - Created new columns:
+    - `region`: Assigned based on the state to one of four U.S. regions.
+  - Applied winsorization to reduce the effect of outliers.
+  - Applied log transformation (`np.log1p`) on highly skewed variables such as `medianincome` and `avgdeathsperyear`.
+
+- **Initial Visualization**
+  - Plotted histograms and boxplots to explore distributions.
+  - Generated a correlation heatmap (`plots/correlation_heatmap.png`) to examine variable relationships.
+
+---
+
+### 4.2 Week 3–4: Exploratory Data Analysis and Baseline Modeling
+
+- **Exploratory Data Analysis (EDA)**
+  - Examined pairwise correlations between socioeconomic variables and cancer mortality.
+  - Scatter plots were generated:
+    - Poverty rate vs. average cancer deaths.
+    - Household size vs. cancer deaths.
+
+- **Baseline Modeling**
+  - Implemented **Linear Regression** to predict `avgdeathsperyear` using key features like `povertypercent`, `medianincome`, and `education`.
+  - Evaluated baseline model:
+    - Achieved moderate R² scores.
+    - Residual plots revealed potential non-linearity and heteroscedasticity.
+
+- **Visualization**
+  - Scatter plot showing poverty rate vs. cancer deaths (`plots/poverty_vs_deaths.png`).
+  - Regional cancer deaths summarized in bar charts (`plots/Cancer_deaths_regions.png`).
+
+---
+
+### 4.3 Week 5–6: Feature Engineering and Model Enhancement
+
+- **Feature Engineering**
+  - Introduced an interaction term: `povertypercent * education` to capture combined effects.
+  - Created dummy variables for regions using one-hot encoding.
+  - Updated preprocessing pipeline to handle numerical and categorical columns separately:
+    - Imputation → Scaling → Encoding.
+
+- **Advanced Modeling: XGBoost**
+  - Implemented `XGBRegressor` with parameters:
+    - `n_estimators=1000`
+    - `learning_rate=0.1`
+    - `early_stopping_rounds=5`
+  - Used `Pipeline` to combine preprocessing and model training.
+  - Early stopping was based on validation set performance to prevent overfitting.
+
+- **Model Evaluation**
+  - Cross-validation with 5 folds:
+    - Scored using mean absolute error (MAE).
+  - Held-out validation set evaluation:
+    - Computed Test MAE and Test R².
+  - Feature importance plot generated (`plots/feature_importance.png`).
+
+---
+
+### 4.4 Week 7–8: Final Model Tuning and Visualization
+
+- **Hyperparameter Tuning**
+  - Performed initial random search to adjust `max_depth`, `min_child_weight`, and `subsample`.
+  - Fine-tuned final model using selected hyperparameters.
+
+- **Residual Analysis**
+  - Plotted residuals vs. predicted values to check for patterns (`plots/residuals_plot.png`).
+  - Found reasonable random scatter, indicating no severe biases.
+
+- **Key Observations**
+  - Poverty rate showed the strongest positive association with cancer deaths.
+  - Higher educational attainment correlated with lower cancer deaths.
+  - Regional disparities were evident, with the South having higher mortality rates.
+
+---
+
+### Key Visual Outputs
+
+- **Feature Importance Bar Plot** (`plots/feature_importance.png`)
+  - Highlights most influential predictors such as poverty rate and median income.
+
+- **Residual vs. Predicted Scatter Plot** (`plots/residuals_plot.png`)
+  - Checks homoscedasticity and linearity assumptions visually.
+
+---
+
+### Summary
+
+Throughout Weeks 1–8, we progressively enhanced the pipeline:
+- Started from simple EDA and linear regression.
+- Gradually moved towards sophisticated feature engineering and XGBoost modeling.
+- Achieved robust predictive performance while maintaining interpretability through feature importance analysis and clear residual diagnostics.
+
+All results directly support the project goals of analyzing the impact of socioeconomic factors on cancer outcomes.
 
 
 
 
-## 5. Results
 
-> (Summarize results. Include key findings, evaluation metrics, plots.)
+# Part 5: Results
 
-- Goals:
-- **Analyze the correlation** between socioeconomic factors and cancer rates
-- **Determine the statistical significance** of income and poverty levels on cancer incidence and mortality
-- **Apply hypothesis testing and regression models** to quantify relationships
-- **Visualize findings** using effective data visualizations
+## Poverty vs Cancer Deaths
+
+To explore the relationship between poverty and cancer mortality, we plotted a scatter plot between county-level poverty percentage and the average number of cancer deaths per year.
+
+![Poverty vs Deaths](../plots/poverty_vs_deaths.png)
+
+**Observation:**  
+There is a positive correlation: counties with higher poverty rates tend to experience more cancer-related deaths. However, the distribution shows significant variance, suggesting that poverty is an important but not exclusive factor influencing cancer mortality.
+
+---
+
+## Education vs Cancer Deaths
+
+To analyze the impact of education, we created a composite education index by averaging three educational attainment metrics: the percentage of high school graduates (18–24 years), bachelor's degree holders (18–24 years), and bachelor's degree holders (25+ years).
+
+The relationship between education level and cancer deaths is shown below:
+
+![Education vs Deaths](../plots/education_vs_deaths.png)
+
+**Observation:**  
+A general negative trend is observed: regions with higher education levels typically have fewer cancer deaths. However, there is notable dispersion, indicating that other demographic and socioeconomic factors also play a role.
+
+---
+
+## Correlation Heatmap
+
+To understand the overall interrelationships among different features, we generated a correlation heatmap for the cleaned dataset.
+
+![Correlation Heatmap](../plots/correlation_heatmap.png)
+
+**Observation:**  
+The heatmap reveals expected relationships, such as a strong negative correlation between poverty and income, and positive correlations between education and private health insurance coverage. These inter-feature relationships provide valuable context for model feature selection.
+
+---
+
+## Cancer Deaths by Region
+
+We also analyzed the regional distribution of cancer deaths by categorizing counties into different U.S. Census regions.
+
+![Cancer Deaths by Region](../plots/cancer_deaths_regions.png)
+
+**Observation:**  
+The Southern region tends to have the highest average cancer death rates among the major U.S. regions. This finding aligns with known regional health disparities often attributed to socioeconomic factors and healthcare access.
+
+---
+
+## Feature Importance (XGBoost Model)
+
+An XGBoost regression model was trained to predict the average number of cancer deaths
