@@ -272,14 +272,33 @@ make clean
 
 ## 2. Testing and GitHub Workflow
 
-- **Test Scripts:**  
-  Lightweight test cases were created under the `tests/` directory using `pytest`. These tests focus on verifying critical components of the project, such as:
-  - Successful data loading.
-  - Integrity of model prediction outputs (no missing or NaN values).
+To ensure the reproducibility and robustness of the project, we implemented tests under the `tests/` directory using `pytest`.
 
-- **GitHub Actions Workflow:**  
-  A GitHub Actions workflow was configured (`.github/workflows/ci.yml`) to automatically run the test suite upon each push or pull request.  
-  The workflow sets up a Python environment, installs project dependencies, and executes `pytest` to ensure the codebase remains functional and reproducible.
+The tests are designed not only to check data existence or basic value correctness, but also to verify that the core pipeline runs correctly given a snippet of the expected data format.
+
+### Test Scripts
+
+- `test_data_loading.py`  
+  Verifies that the prediction output file (`linear_regression_predictions.csv`) can be loaded successfully and contains expected data.
+
+- `test_model_output.py`  
+  Checks that the model output includes a `Predicted` column and that it contains no missing (NaN) values.
+
+- `test_pipeline_run.py`  
+  Simulates a small sample input with the expected structure (e.g., `povertypercent`, `medincome`, `popest2015`, `avgdeathsperyear`) and validates that the preprocessing and modeling pipeline runs without errors.  
+  This test helps catch issues such as:
+  - Missing or renamed columns
+  - Changed data types or unexpected formats
+  - Silent logic failures during training or prediction
+
+### GitHub Actions Workflow
+
+A GitHub Actions workflow (`.github/workflows/ci.yml`) is configured to automatically:
+
+1. Set up a Python environment with dependencies listed in `requirements.txt`
+2. Run the full test suite using `pytest`
+
+This continuous integration workflow ensures that any new commits are automatically checked for functionality and data consistency, helping maintain the project's reliability over time.
 
 ## 3. Data Visualizations
 
