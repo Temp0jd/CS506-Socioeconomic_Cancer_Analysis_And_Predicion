@@ -416,8 +416,6 @@ All results directly support the project goals of analyzing the impact of socioe
 
 ## Poverty vs Cancer Deaths
 
-To explore the relationship between poverty and cancer mortality, we plotted a scatter plot between county-level poverty percentage and the average number of cancer deaths per year.
-
 ![Poverty vs Deaths](plots/poverty_vs_deaths.png)
 
 **Observation:**  
@@ -426,10 +424,6 @@ There is a positive correlation: counties with higher poverty rates tend to expe
 ---
 
 ## Education vs Cancer Deaths
-
-To analyze the impact of education, we created a composite education index by averaging three educational attainment metrics: the percentage of high school graduates (18–24 years), bachelor's degree holders (18–24 years), and bachelor's degree holders (25+ years).
-
-The relationship between education level and cancer deaths is shown below:
 
 ![Education vs Deaths](plots/education_vs_deaths.png)
 
@@ -440,8 +434,6 @@ A general negative trend is observed: regions with higher education levels typic
 
 ## Correlation Heatmap
 
-To understand the overall interrelationships among different features, we generated a correlation heatmap for the cleaned dataset.
-
 ![Correlation Heatmap](plots/correlation_heatmap.png)
 
 **Observation:**  
@@ -451,9 +443,7 @@ The heatmap reveals expected relationships, such as a strong negative correlatio
 
 ## Cancer Deaths by Region
 
-We also analyzed the regional distribution of cancer deaths by categorizing counties into different U.S. Census regions.
-
-![Cancer Deaths by Region](plots/cancer_deaths_regions.png)
+![Cancer Deaths by Region](plots/Cancer_deaths_regions.png)
 
 **Observation:**  
 The Southern region tends to have the highest average cancer death rates among the major U.S. regions. This finding aligns with known regional health disparities often attributed to socioeconomic factors and healthcare access.
@@ -461,10 +451,6 @@ The Southern region tends to have the highest average cancer death rates among t
 ---
 
 ## Feature Importance (XGBoost Model)
-
-An XGBoost regression model was trained to predict the average number of cancer deaths per year based on selected features.
-
-The feature importance plot is shown below:
 
 ![Feature Importance](plots/feature_importance.png)
 
@@ -491,8 +477,6 @@ Key socioeconomic factors such as population size, median income, and educationa
 ---
 
 ## Residuals Analysis
-
-Finally, we examined the residuals from the XGBoost model to assess its predictive performance.
 
 ![Residuals Plot](plots/residual_plot.png)
 
