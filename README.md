@@ -412,13 +412,13 @@ All results directly support the project goals of analyzing the impact of socioe
 
 
 
-# Part 5: Results
+## Results
 
 ## Poverty vs Cancer Deaths
 
 To explore the relationship between poverty and cancer mortality, we plotted a scatter plot between county-level poverty percentage and the average number of cancer deaths per year.
 
-![Poverty vs Deaths](../plots/poverty_vs_deaths.png)
+![Poverty vs Deaths](plots/poverty_vs_deaths.png)
 
 **Observation:**  
 There is a positive correlation: counties with higher poverty rates tend to experience more cancer-related deaths. However, the distribution shows significant variance, suggesting that poverty is an important but not exclusive factor influencing cancer mortality.
@@ -431,7 +431,7 @@ To analyze the impact of education, we created a composite education index by av
 
 The relationship between education level and cancer deaths is shown below:
 
-![Education vs Deaths](../plots/education_vs_deaths.png)
+![Education vs Deaths](plots/education_vs_deaths.png)
 
 **Observation:**  
 A general negative trend is observed: regions with higher education levels typically have fewer cancer deaths. However, there is notable dispersion, indicating that other demographic and socioeconomic factors also play a role.
@@ -442,7 +442,7 @@ A general negative trend is observed: regions with higher education levels typic
 
 To understand the overall interrelationships among different features, we generated a correlation heatmap for the cleaned dataset.
 
-![Correlation Heatmap](../plots/correlation_heatmap.png)
+![Correlation Heatmap](plots/correlation_heatmap.png)
 
 **Observation:**  
 The heatmap reveals expected relationships, such as a strong negative correlation between poverty and income, and positive correlations between education and private health insurance coverage. These inter-feature relationships provide valuable context for model feature selection.
@@ -453,7 +453,7 @@ The heatmap reveals expected relationships, such as a strong negative correlatio
 
 We also analyzed the regional distribution of cancer deaths by categorizing counties into different U.S. Census regions.
 
-![Cancer Deaths by Region](../plots/cancer_deaths_regions.png)
+![Cancer Deaths by Region](plots/cancer_deaths_regions.png)
 
 **Observation:**  
 The Southern region tends to have the highest average cancer death rates among the major U.S. regions. This finding aligns with known regional health disparities often attributed to socioeconomic factors and healthcare access.
@@ -462,4 +462,42 @@ The Southern region tends to have the highest average cancer death rates among t
 
 ## Feature Importance (XGBoost Model)
 
-An XGBoost regression model was trained to predict the average number of cancer deaths
+An XGBoost regression model was trained to predict the average number of cancer deaths per year based on selected features.
+
+The feature importance plot is shown below:
+
+![Feature Importance](plots/feature_importance.png)
+
+**Note on Feature Names:**  
+Feature names are displayed as "F0", "F1", etc., due to preprocessing transformations removing original feature labels during pipeline execution.  
+The mapping from Feature ID to original feature name is:
+
+| Rank | Feature ID | Feature Name |
+|:----|:-----------|:-------------|
+| 1 | F1 | `popest2015` |
+| 2 | F0 | `medincome` |
+| 3 | F6 | `pctnohs18_24` |
+| 4 | F7 | `pcths18_24` |
+| 5 | F9 | `pcths25_over` |
+| 6 | F3 | `medianage` |
+| 7 | F20 | `birthrate` |
+| 8 | F8 | `pctbachdeg18_24` |
+| 9 | F17 | `pctwhite` |
+| 10 | F11 | `pctemployed16_over` |
+
+**Observation:**  
+Key socioeconomic factors such as population size, median income, and educational attainment levels dominate the model's feature importance rankings, reinforcing the results observed during exploratory data analysis.
+
+---
+
+## Residuals Analysis
+
+Finally, we examined the residuals from the XGBoost model to assess its predictive performance.
+
+![Residuals Plot](plots/residual_plot.png)
+
+**Observation:**  
+Most residuals are centered closely around zero, suggesting that the model’s predictions are generally unbiased across different predicted death counts.  
+However, a few large residuals appear at very high predicted death counts (>4000), indicating the model's difficulty in accurately predicting rare extreme cases. Overall, the residual pattern supports the validity of the model for general population-level predictions.
+
+---
