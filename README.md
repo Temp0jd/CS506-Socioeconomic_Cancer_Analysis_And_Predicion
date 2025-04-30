@@ -113,17 +113,17 @@ Monday, March 31<sup>st</sup>, 2025
 
 ### Correlation Heatmap
 <p align="center">
-  <img src="plots/correlation_heatmap.png" width="750"/>
+  <img src="../plots/correlation_heatmap.png" width="750"/>
 </p>
 
 ### Poverty Rate vs Cancer Deaths
 <p align="center">
-  <img src="plots/poverty_vs_deaths.png" width="750"/>
+  <img src="../plots/poverty_vs_deaths.png" width="750"/>
 </p>
 
 ### Cancer Deaths Across U.S. Regions
 <p align="center">
-  <img src="plots/Cancer_deaths_regions.png" width="750"/>
+  <img src="../plots/Cancer_deaths_regions.png" width="750"/>
 </p>
 
 ## Data processing Tasks
@@ -302,76 +302,67 @@ This continuous integration workflow ensures that any new commits are automatica
 
 ## 3. Data Visualizations
 
-This section presents key visualizations used to explore the relationships between socioeconomic factors and cancer incidence and mortality.
+This section presents key visualizations used to explore the relationships between socioeconomic factors and cancer incidence and mortality in the U.S.
+
+---
 
 ### 3.1 Correlation Matrix
 
 <p align="center">
-  <img src="plots/correlation_heatmap.png" width="750"/>
+  <img src="../plots/correlation_heatmap.png" width="750"/>
 </p>
 
-The **correlation matrix** above visualizes pairwise correlations between socioeconomic indicators and cancer-related variables.  
+**Observation:**  
+The correlation matrix shows relationships between socioeconomic indicators and cancer-related outcomes. Notable patterns include:
+- Strong positive correlation between average cancer cases and deaths
+- Strong negative correlation between income and poverty
+- Moderate negative correlation between higher education rates and cancer mortality
 
-**Key observations:**
-- A strong positive correlation exists between `avganncount` (average annual cancer cases) and `avgdeathsperyear`, suggesting consistent cancer mortality patterns.
-- A moderate **negative correlation** is observed between `povertypercent` and `median income`, confirming that counties with higher poverty levels tend to have lower median incomes.
-- Educational attainment, employment rate, and insurance coverage also show meaningful associations with cancer-related outcomes.
+---
 
-**Technical notes:**
-- Input data was derived from a cleaned dataset (`cleaned_data_week1_2.csv`).
-- The correlation matrix was computed using Pearson's method and visualized with Seaborn’s `heatmap()` function.
-- Insights from this matrix informed both **feature selection** and **model interpretation** in subsequent stages.
-
-### 3.2 Cancer Mortality Rate by State
+### 3.2 Poverty Rate vs. Cancer Deaths
 
 <p align="center">
-  <img src="plots/cancer_mortality_by_state.png" width="800"/>
+  <img src="../plots/poverty_vs_deaths.png" width="750"/>
 </p>
 
-This choropleth map visualizes the **cancer mortality rate** (deaths per 100,000 population) across U.S. states.  
-Darker red shades indicate higher death rates. The data is aggregated from county-level estimates and grouped by state averages.
+**Observation:**  
+Counties with higher poverty percentages tend to report more cancer-related deaths on average. Although the overall trend is positive, considerable variance exists, suggesting other contributing factors.
 
-**Key observations:**
-- States in the South and Midwest, such as **Mississippi**, **Kentucky**, and **West Virginia**, exhibit notably high mortality rates.
-- Western and Northeastern states tend to have comparatively lower death rates.
-- These patterns align with known socioeconomic and healthcare access disparities in the U.S.
+---
 
-**Interactive Features (via Plotly):**
-- The map is implemented using Plotly's interactive `choropleth` function.
-- When run inside the Jupyter Notebook (`notebooks/interactive_viz.ipynb`), users can:
-  - **Hover** over each state to view the exact death rate.
-  - **Zoom** or **pan** for closer examination.
-  - **Access tooltips** that dynamically display state-level metrics.
+### 3.3 Education vs. Cancer Deaths
 
-**Technical notes:**
-- Data Source: Aggregated from `cleaned_data_week1_2.csv` (county-level).
-- Visualization Tool: `plotly.express.choropleth()` with USA-states location mode.
-- Output Image: `plots/cancer_mortality_by_state.png`
+<p align="center">
+  <img src="../plots/education_vs_deaths.png" width="750"/>
+</p>
 
-### 3.3 Interactive Visualizations
+**Observation:**  
+A generally negative trend appears: counties with higher composite education scores report fewer cancer deaths. However, variance across the data points indicates a multifactorial relationship.
 
-To enable dynamic exploration of trends in cancer mortality and socioeconomic indicators, we implemented interactive plots using Plotly.
+---
 
-- **Interactive Choropleth Map:**  
-  Users can zoom, pan, and hover over each U.S. state to view its cancer mortality rate per 100,000 residents.
+### 3.4 Cancer Deaths Across U.S. Regions
 
-- **Interactive Scatter Plot:**  
-  Displays the relationship between poverty rate and average cancer deaths. Hovering reveals state details, and a trendline highlights the overall pattern.
+<p align="center">
+  <img src="../plots/Cancer_deaths_regions.png" width="750"/>
+</p>
 
-> For interactive versions of the plots, see: `notebooks/interactive_viz.ipynb` - (Preparation of the environment is needed before running the code)
+**Observation:**  
+Boxplots grouped by U.S. Census regions show the South consistently has a higher median and a wider range of cancer death counts. The West region includes several outliers with unusually high values.
 
-### 3.4 Summary of Visualizations
-Some plots are explained in the `Results` section.
+---
 
-| Visualization | Format | Insight |
-|---------------|--------|---------|
-| Correlation Matrix | Heatmap | Reveals feature relationships |
-| Poverty vs. Cancer Deaths | Scatter | Shows poverty-related trends |
-| Cancer Mortality by Region | Bar Chart | Exposes regional disparities |
-| Cancer Mortality by State | Choropleth | Visualizes geographic risk |
-| Top 15 States by Deaths | Bar Chart | Compares high-death states |
-| Feature Importance | Bar Chart | Highlights key predictors |
-| Residual Plot | Scatter | Validates model behavior |
+### 3.5 Cancer Mortality Rate by State
+
+<p align="center">
+  <img src="../plots/cancer_mortality_by_state.png" width="800"/>
+</p>
+
+**Observation:**  
+This choropleth map shows that Southern and Midwestern states (e.g., Kentucky, Mississippi, West Virginia) have the highest cancer mortality rates. Lighter regions like the West and Northeast suggest better outcomes, potentially tied to socioeconomic and healthcare access disparities.
+
+---
 
 ## 4. Data Processing and Modeling Description
 
@@ -477,74 +468,76 @@ All results directly support the project goals of analyzing the impact of socioe
 
 ## Results
 
-## Poverty vs Cancer Deaths
+This section focuses on model performance and outputs from both linear regression and XGBoost models. The evaluation emphasizes model accuracy, error behavior, and key predictive features.
+
+---
+
+### Actual vs Predicted (Linear Regression)
 
 <p align="center">
-  <img src="plots/poverty_vs_deaths.png" width="750"/>
+  <img src="../plots/actual_vs_predicted.png" width="750"/>
 </p>
 
 **Observation:**  
-There is a positive correlation: counties with higher poverty rates tend to experience more cancer-related deaths. However, the distribution shows significant variance, suggesting that poverty is an important but not exclusive factor influencing cancer mortality.
+The linear regression model demonstrates a general positive alignment between actual and predicted cancer death rates. However, considerable spread around the diagonal line reveals systematic under- and over-predictions, especially for extreme values.
 
-## Education vs Cancer Deaths
+**Interpretation:**  
+While linear regression captures broad trends, its limited flexibility makes it less effective for counties with unusually high or low death rates.
+
+---
+
+### Actual vs Predicted (XGBoost)
 
 <p align="center">
-  <img src="plots/education_vs_deaths.png" width="750"/>
+  <img src="../plots/xgboost_predictions.png" width="750"/>
 </p>
 
 **Observation:**  
-A general negative trend is observed: regions with higher education levels typically have fewer cancer deaths. However, there is notable dispersion, indicating that other demographic and socioeconomic factors also play a role.
+Compared to the linear model, the XGBoost regression predictions align more tightly with the actual values, with reduced dispersion and fewer extreme errors.
 
-## Correlation Heatmap
+**Interpretation:**  
+XGBoost’s ability to model non-linear relationships and interactions allows it to achieve better prediction accuracy, especially in mid- and high-death regions.
+
+---
+
+### Residuals vs Predicted Values
 
 <p align="center">
-  <img src="plots/correlation_heatmap.png" width="750"/>
+  <img src="../plots/residual_plot.png" width="750"/>
 </p>
 
 **Observation:**  
-The heatmap reveals expected relationships, such as a strong negative correlation between poverty and income, and positive correlations between education and private health insurance coverage. These inter-feature relationships provide valuable context for model feature selection.
+Residuals are mostly centered around zero, indicating minimal bias. However, heteroscedasticity appears at higher predicted values, with a few large deviations suggesting outlier behavior.
 
-## Cancer Deaths by Region
+**Interpretation:**  
+While the model performs well overall, extreme cancer mortality cases may be influenced by latent factors not included in the model (e.g., pollution, comorbidities).
 
-<p align="center">
-  <img src="plots/Cancer_deaths_regions.png" width="750"/>
-</p>
+---
 
-**Observation:**  
-The Southern region tends to have the highest average cancer death rates among the major U.S. regions. This finding aligns with known regional health disparities often attributed to socioeconomic factors and healthcare access.
-
-## Feature Importance (XGBoost Model)
+### Feature Importance (XGBoost)
 
 <p align="center">
-  <img src="plots/feature_importance.png" width="750"/>
+  <img src="../plots/feature_importance.png" width="750"/>
 </p>
 
-**Note on Feature Names:**  
-Feature names are displayed as "F0", "F1", etc., due to preprocessing transformations removing original feature labels during pipeline execution.  
-The mapping from Feature ID to original feature name is:
+**Note:**  
+Feature IDs correspond to preprocessed variables. The mapping is:
 
 | Rank | Feature ID | Feature Name |
-|:----|:-----------|:-------------|
-| 1 | F1 | `popest2015` |
-| 2 | F0 | `medincome` |
-| 3 | F6 | `pctnohs18_24` |
-| 4 | F7 | `pcths18_24` |
-| 5 | F9 | `pcths25_over` |
-| 6 | F3 | `medianage` |
-| 7 | F20 | `birthrate` |
-| 8 | F8 | `pctbachdeg18_24` |
-| 9 | F17 | `pctwhite` |
-| 10 | F11 | `pctemployed16_over` |
+|------|------------|--------------|
+| 1    | F1         | `popest2015` |
+| 2    | F0         | `medincome` |
+| 3    | F6         | `pctnohs18_24` |
+| 4    | F7         | `pcths18_24` |
+| 5    | F9         | `pcths25_over` |
+| 6    | F3         | `medianage` |
+| 7    | F20        | `birthrate` |
+| 8    | F8         | `pctbachdeg18_24` |
+| 9    | F17        | `pctwhite` |
+| 10   | F11        | `pctemployed16_over` |
 
-**Observation:**  
-Key socioeconomic factors such as population size, median income, and educational attainment levels dominate the model's feature importance rankings, reinforcing the results observed during exploratory data analysis.
+**Interpretation:**  
+Population size, income, and educational attainment dominate the model's decision logic. This reinforces the hypothesis that socioeconomic factors are strong drivers of cancer mortality variations across counties.
 
-## Residuals Analysis
+---
 
-<p align="center">
-  <img src="plots/residual_plot.png" width="750"/>
-</p>
-
-**Observation:**  
-Most residuals are centered closely around zero, suggesting that the model’s predictions are generally unbiased across different predicted death counts.  
-However, a few large residuals appear at very high predicted death counts (>4000), indicating the model's difficulty in accurately predicting rare extreme cases. Overall, the residual pattern supports the validity of the model for general population-level predictions.
