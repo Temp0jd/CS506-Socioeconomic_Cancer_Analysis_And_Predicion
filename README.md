@@ -1,11 +1,13 @@
 # Impact of Socioeconomic Factors on Cancer Incidence and Outcomes
 
+🔽 [Jump to Final Report](#final-report)
+
 BU CS 506: Data Science Tools and Applications  
 Project Proposal  
 Lance Galletti  
 Xinyu Li, Wenshou He, Benjamin Pfeiffer  
 Monday, February 10<sup>th</sup>, 2025
-🔽 [Jump to Final Report](#final-report)
+
 
 ## 1. Project Description
 
