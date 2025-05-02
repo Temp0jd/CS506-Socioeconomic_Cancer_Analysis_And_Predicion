@@ -209,8 +209,8 @@ To set up the environment:
 
 ```bash
 # 1. Fork and clone the repository
-git clone git@github.com:Temp0jd/CS506-Socioeconomic_Cancer_Analysis_And_Predicion.git
-cd CS506-Socioeconomic_Cancer_Analysis_And_Predicion
+git clone <your-repo-ssh-url>
+cd <your-project-folder>
 
 # 2. Create a virtual environment
 python3 -m venv .venv
